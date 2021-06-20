@@ -1,1 +1,1 @@
-["USD to 1 bitcoin : 50647", "USD to 1 ethereum : 4113.43", "USD to 1 binancecoin : 604.03", "USD to 1 dogecoin : 0.556804"]
+["USD to 1 dogecoin : 0.481046", "USD to 1 bitcoin : 43571", "USD to 1 binancecoin : 510.18"]

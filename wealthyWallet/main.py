@@ -3,12 +3,24 @@ import urllib.request
 
 currency = 'https://v6.exchangerate-api.com/v6/a54f7d46035b54ec17a14edb/pair/USD/COP'
 a = 'https://api.coingecko.com/api/v3/coins/'
-coins = ['bitcoin', 'ethereum', 'binancecoin', 'dogecoin']
+coins = ['dogecoin', 'bitcoin', 'ethereum']
 c = '?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false'
 tracked = []
 feed = []
-update = bool
 separate = ''
+
+def start():
+    print('!!Crypto Addiction!!')
+    with open("trackedCoins.txt", "r") as fp:
+        savedFile = json.load(fp)
+    getCoin(coins)
+    for coin in feed:
+        print(coin)
+    print("Your Tracked Prices:")
+    for items in savedFile:
+        print(items)
+    savePrep()
+
 def getCoin(coins):
     for i in range(len(coins)):
         b = coins[i]
@@ -18,24 +30,32 @@ def getCoin(coins):
             info = ('USD to 1 ', str(b), ' : ', str(rate))
             info = separate.join(info)
             feed.append(info)
-            if update:
-                tracked.append(info)
+            tracked.append(info)
 
-if __name__ == '__main__':
-    print('Wealthy Wallet Asset Tracker')
-    with open("trackedCoins.txt", "r") as fp:
-        savedFile = json.load(fp)
-    getCoin(coins)
-    for coin in feed:
-        print(coin)
-    print("Your Tracked Prices:")
-    for items in savedFile:
-        print(items)
+def savePrep():
     print("Would you like to update saved prices? ")
     print("1) YES : 2) NO")
-    x = int(input("Number Only: "))
+    try:
+        x = int(input("Number Only: "))
+    except:
+        print("Not an integer, try again:")
+        savePrep()
+    saveCoin(x)
+
+def saveCoin(x):
     if x == 1:
-        with open("trackedCoins.txt", "w") as fp:
+         with open("trackedCoins.txt", "w") as fp:
             json.dump(tracked, fp)
+    elif x == 2:
+        exit(0)
+    else:
+        print('Number 1 or 2 only, try again.')
+        savePrep()
+
+if __name__ == '__main__':
+    start()
+
+
+
 
 
